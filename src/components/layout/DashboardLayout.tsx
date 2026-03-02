@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
 import { cn } from '@/lib/utils';
-import { useAuthContext } from '@/context/AuthContext';
 
 interface DashboardLayoutProps {
   isAdmin?: boolean;
@@ -13,8 +12,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ isAdmin = fals
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   // Auth check is handled by ProtectedRoute
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isAuthenticated } = useAuthContext();
 
   // Handle window resize
   useEffect(() => {

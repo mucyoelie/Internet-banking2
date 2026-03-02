@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { CheckCircle2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -27,6 +28,7 @@ const Transfer: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [saveAsBeneficiary, setSaveAsBeneficiary] = useState(false);
+  const [transactionReference, setTransactionReference] = useState('');
 
   const selectedAccount = mockAccounts.find((acc) => acc.id === fromAccount);
   const availableBalance = selectedAccount?.balance || 0;
@@ -40,6 +42,7 @@ const Transfer: React.FC = () => {
 
     setIsSubmitting(false);
     setShowSuccess(true);
+    setTransactionReference(`TRX${Date.now()}`);
 
     // Reset form after 3 seconds
     setTimeout(() => {
@@ -72,7 +75,7 @@ const Transfer: React.FC = () => {
             <p className="mt-2 text-slate-500">
               {formatCurrency(parseFloat(amount))} has been sent to {recipientName}
             </p>
-            <p className="text-sm text-slate-400">Reference: TRX{Date.now()}</p>
+            <p className="text-sm text-slate-400">Reference: {transactionReference}</p>
           </CardContent>
         </Card>
       ) : (

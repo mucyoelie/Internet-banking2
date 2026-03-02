@@ -9,17 +9,18 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts';
+import type { TooltipProps } from 'recharts';
 import { cn } from '@/lib/utils';
 
 interface BarChartProps {
   data: Array<{ label: string; value: number; color?: string }>;
   className?: string;
   showGrid?: boolean;
-  // barColor is available for future use
+  barColor?: string;   // ✅ FIX ADDED
   gradientColors?: [string, string];
 }
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     return (
       <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-lg">
@@ -43,16 +44,25 @@ export const BarChart: React.FC<BarChartProps> = ({
   return (
     <div className={cn('h-64 w-full', className)}>
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsBarChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+        <RechartsBarChart
+          data={data}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
           <defs>
             <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={gradientColors[0]} />
               <stop offset="100%" stopColor={gradientColors[1]} />
             </linearGradient>
           </defs>
+
           {showGrid && (
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="#e2e8f0"
+              vertical={false}
+            />
           )}
+
           <XAxis
             dataKey="label"
             axisLine={false}
@@ -60,6 +70,7 @@ export const BarChart: React.FC<BarChartProps> = ({
             tick={{ fill: '#64748b', fontSize: 12 }}
             dy={10}
           />
+
           <YAxis
             axisLine={false}
             tickLine={false}
@@ -67,7 +78,9 @@ export const BarChart: React.FC<BarChartProps> = ({
             tickFormatter={(value) => `$${value}`}
             dx={-10}
           />
+
           <Tooltip content={<CustomTooltip />} />
+
           <Bar
             dataKey="value"
             fill="url(#barGradient)"
@@ -77,7 +90,7 @@ export const BarChart: React.FC<BarChartProps> = ({
             {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={entry.color || 'url(#barGradient)'}
+                fill={entry.color || barColor || 'url(#barGradient)'}
               />
             ))}
           </Bar>

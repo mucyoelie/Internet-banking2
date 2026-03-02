@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Plus, TrendingUp, TrendingDown, ArrowRight, PieChart as PieChartIcon, BarChart3 } from 'lucide-react';
+//import { Plus, TrendingUp, TrendingDown, ArrowRight, PieChart as PieChartIcon, BarChart3 } from 'lucide-react';
+import { Plus, TrendingUp, TrendingDown, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 // Tabs components available for future use

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Plus, Calculator, ArrowRight, CheckCircle2, Clock, AlertCircle } from 'lucide-react';
+//import { Plus, Calculator, ArrowRight, CheckCircle2, Clock, AlertCircle } from 'lucide-react';
+import { Plus, Calculator, ArrowRight, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
